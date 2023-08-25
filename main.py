@@ -40,11 +40,18 @@ def manually_enter_board(rows, columns, board):
     print("Enter the sudoku board row by row")
     print("Enter the number you want then press enter, use 0 for empty spaces.")
     for i in range(rows):
-        userInput = int(input())
         rows = []
         for j in range(columns):
+            print("Position", i+1, ",", j+1)
+            userInput = int(input())
+            if userInput < 0 or userInput > 9:
+                print("Invalid input. Please try again.")
+                print("Position", i+1, ",", j+1)
+                userInput = int(input())
             rows.append(userInput)
         board.append(rows)
+    print("Printing sudoku board:")
+    print_board(board)
 
 def randomly_generate_board(board):
     print("Printing randomly generated sudoku board:")
@@ -67,8 +74,5 @@ def welcome():
         welcome()
 
 if __name__ == "__main__":
-    welcome()
-    manually_enter_board(rows, columns, board)
-    randomly_generate_board(board)
     create_board(rows, columns, board)
-    print_board(board)
+    welcome()
