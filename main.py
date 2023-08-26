@@ -3,25 +3,18 @@ Sudoku solver in Python using the console and the backtracking algorithm
 You can either enter the sudoku manually or use a pre-generarted sudoku board
 The sudoku board is printed in the console and the solution is printed in the console
 The solution is also saved in a text file called "solution.txt"
-The sudoku board is saved in a text file called "sudoku.txt"
 
 Author: Armaan Hajar
 Date Started: August 24th, 2023
 Date Finished: 
 """
 
+# This file is the main file that runs the program, it is the file that the user runs and interacts with
+# The solver.py file contains the backtracking algorithm that solves the sudoku board
 
 rows = 9
 columns = 9
-boxes = 9
 board = []
-
-def create_board(rows, columns, board):
-    for i in range(rows):
-        rows = []
-        for j in range(columns):
-            rows.append(0)
-        board.append(rows)
 
 def print_board(board):
     print("-----------------------")
@@ -117,5 +110,4 @@ def welcome():
         welcome()
 
 if __name__ == "__main__":
-    create_board(rows, columns, board)
     welcome()
