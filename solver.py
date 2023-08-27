@@ -1,18 +1,42 @@
-# this file will contain the solver for the sudoku board
+# This file will contain the solver for the sudoku board
 # It will be using the backtracking algorithm to solve the board
 
-from main.py import board as board
-from main.py import rows as rows
-from main.py import columns as columns
+def find_empty(board):
+    for i in range(len(board)):
+        for j in range(len(board[0])):
+            if board[i][j] == 0:
+                return (i, j)
+    return None
 
-boxes = [
-    [0, 1, 2, 9, 10, 11, 18, 19, 20], 
-    [3, 4, 5, 12, 13, 14, 21, 22, 23], 
-    [6, 7, 8, 15, 16, 17, 24, 25, 26], 
-    [27, 28, 29, 36, 37, 38, 45, 46, 47], 
-    [30, 31, 32, 39, 40, 41, 48, 49, 50], 
-    [33, 34, 35, 42, 43, 44, 51, 52, 53], 
-    [54, 55, 56, 63, 64, 65, 72, 73, 74], 
-    [57, 58, 59, 66, 67, 68, 75, 76, 77], 
-    [60, 61, 62, 69, 70, 71, 78, 79, 80]
-    ]
+def check_valid(board, number, position):
+    # Check row
+    for i in range(len(board[0])):
+        if board[position[0]][i] == number and position[1] != i:
+            return False
+    # Check column
+    for i in range(len(board)):
+        if board[i][position[1]] == number and position[0] != i:
+            return False
+    # Check box
+    box_x = position[1] // 3
+    box_y = position[0] // 3
+    for i in range(box_y * 3, box_y * 3 + 3):
+        for j in range(box_x * 3, box_x * 3 + 3):
+            if board[i][j] == number and (i, j) != position:
+                return False
+    return True
+
+def solve_board(board): # Backtracking algorithm
+    find = find_empty(board)
+    if not find: # If find is None, board is solved
+        return True
+    else: # If find is not None, board is not solved
+        row, column = find
+    for i in range(1, 10): 
+        if check_valid(board, i, (row, column)): # If the number is valid, add it to the board
+            board[row][column] = i
+            if solve_board(board): # If the board is solved, return True
+                return True
+            else: # If the board is not solved, backtrack
+                board[row][column] = 0
+    return False 
