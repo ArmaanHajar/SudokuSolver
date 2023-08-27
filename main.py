@@ -1,15 +1,3 @@
-"""
-Sudoku solver in Python using the console and the backtracking algorithm
-You can either enter the sudoku manually or use a pre-generarted sudoku board
-The sudoku board is printed in the console and the solution is printed in the console
-The solution is also saved in a text file called solution.txt
-Times are printed in the console for how long it took to solve the board
-
-Author: Armaan Hajar
-Date Started: August 24th, 2023
-Date Finished: 
-"""
-
 # This file is the main file that runs the program, it is the file that the user runs and interacts with
 # The solver.py file contains the backtracking algorithm that solves the sudoku board
 
